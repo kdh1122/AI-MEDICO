@@ -16,7 +16,7 @@ function CheckoutBanner(props) {
                     </Link>
                 </Grid.Column>
                 <Grid.Column width={12} verticalAlign='middle' textAlign='center' style={headerStyle}>
-                    <Header as='h1' textAlign='center'>Patient Info (<QuantityText>{props.quantity}</QuantityText>)</Header>
+                    <Header as='h1' textAlign='center'>Patient Info. </Header>
                 </Grid.Column>
             </Grid.Row>
         </Grid>

@@ -3,8 +3,11 @@ import Amplify, { Storage, Predictions } from 'aws-amplify';
 import { AmazonAIPredictionsProvider } from '@aws-amplify/predictions';
 import awsconfig from '../aws-exports';
 import mic from 'microphone-stream';
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import { Dropdown } from 'semantic-ui-react'
 import InitState from './InitState'
 import TopMenu from '../components/TopMenu'
+import { updateTodo } from '../graphql/mutations';
 import { listTodos } from '../graphql/queries';
 import awsExports from "../aws-exports";
 import { useEffect } from "react";
@@ -18,7 +21,13 @@ function Transcribe(props) {
     // Transcribe 컴포넌트 내부에서
     const [items, setItems] = useState([]);
     const [selectedName, setSelectedName] = useState('');
+    const [selectedId, setSelectedId] = useState('');
     const [todoItems, setTodoItems] = useState([]);
+    
+    const dropdownStyle = {
+        marginTop: '1em',
+        marginLeft: '1em',
+    };
     
     async function listTodoItem() {
         const todos = await API.graphql(graphqlOperation(listTodos));
@@ -35,17 +44,23 @@ function Transcribe(props) {
         <div style={styles}>
             <InitState />
             <TopMenu />
+            <div>
+              <Dropdown text={selectedName || 'Select Patient'} pointing='top left' style={dropdownStyle}>
+                  <Dropdown.Menu>
+                      {items.map((item, index) => (
+                          <Dropdown.Item key={index} icon='address card' text={item.name +' '+ item.birth} onClick={() => {
+                              setSelectedName(item.name);
+                              setSelectedId(item.id);
+                          }} />
+                      ))}
+                  </Dropdown.Menu>
+              </Dropdown>
+            </div>
             <h2>Transcribe Page</h2>
-            <p>Transcribe Audio</p>
-            <SpeechToText />
+            <p>환자를 선택 후 녹음을 시작하세요</p>
+            <SpeechToText selectedId={selectedId} />
             <br/>
             <button onClick={() => props.history.push('/')}>Back to Main</button>
-            {items.map((item, index) => (
-                <div key={index}>
-                    {item.name}
-                            
-                </div>
-            ))}
         </div>
     );
 }
@@ -142,9 +157,19 @@ function SpeechToText(props) {
         },
         // language: "en-US", // other options are "en-GB", "fr-FR", "fr-CA", "es-US"
       },
-    }).then(({ transcription: { fullText } }) => setResponse(fullText))
-      .catch(err => setResponse(JSON.stringify(err, null, 2)))
+    }).then(({ transcription: { fullText } }) => {
+      setResponse(fullText);
+      if (props.selectedId) {
+        updateSpecificTodoItem(props.selectedId, fullText);
+      }
+    })
+    .catch(err => setResponse(JSON.stringify(err, null, 2)));
   }
+  
+  async function updateSpecificTodoItem(todoId, updatedDescription) {
+        const updatedTodo = { id: todoId, description: updatedDescription };
+        await API.graphql(graphqlOperation(updateTodo, { input: updatedTodo }));
+    }
 
   return (
     <div className="Text">

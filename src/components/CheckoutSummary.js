@@ -17,10 +17,11 @@ function CheckoutSummary(props) {
     const [items, setItems] = useState([]); // Todo 항목들을 저장할 상태 변수
     const [itemName, setItemName] = useState('');
     const [itemDescription, setItemDescription] = useState('');
+    const [itemBirth, setItemBirth] = useState('');
 
   // Todo 항목을 조회하는 useEffect
     async function createTodoItem() {
-        const todo = {name: itemName, description: itemDescription};
+        const todo = {name: itemName, birth: itemBirth, description: itemDescription};
         await API.graphql(graphqlOperation(createTodo, { input: todo}));
         listTodoItem(); 
     }
@@ -33,8 +34,8 @@ function CheckoutSummary(props) {
         await API.graphql(graphqlOperation(deleteTodo, { input: { id: todoId } }));
         listTodoItem(); // Refresh the todo list
     }
-    async function updateSpecificTodoItem(todoId, updatedName, updatedDescription) {
-        const updatedTodo = { id: todoId, name: updatedName, description: updatedDescription };
+    async function updateSpecificTodoItem(todoId, updatedName, updatedBirth, updatedDescription) {
+        const updatedTodo = { id: todoId, name: updatedName, birth: updatedBirth, description: updatedDescription };
         await API.graphql(graphqlOperation(updateTodo, { input: updatedTodo }));
         listTodoItem(); // Refresh the todo list
     }
@@ -69,12 +70,17 @@ function CheckoutSummary(props) {
                         <Grid.Column width={4}>
                             <Grid.Column width={4}>
                                 <Input
-                                    placeholder="Name"
+                                    placeholder="이름 *"
                                     value={itemName}
                                     onChange={(event) => setItemName(event.target.value)}
                                 />
                                 <Input
-                                    placeholder="Description"
+                                    placeholder="주민번호 앞 6자리 *"
+                                    value={itemBirth}
+                                    onChange={(event) => setItemBirth(event.target.value)}
+                                />
+                                <Input
+                                    placeholder="증상"
                                     value={itemDescription}
                                     onChange={(event) => setItemDescription(event.target.value)}
                                 />
@@ -94,13 +100,14 @@ function CheckoutSummary(props) {
                 <Segment>
                     {items.map((item, index) => (
                         <div key={index}>
-                            {item.id} - {item.name} - {item.description}
+                            {item.name} {item.birth} - {item.description}
                             <Button size='mini' color='red' onClick={() => deleteSpecificTodoItem(item.id)}>Delete</Button>
                             <Button size='mini' color='blue' onClick={() => {
                                 const updatedName = prompt("Enter updated name:", item.name);
+                                const updatedBirth = prompt("Enter updated birth:", item.birth);
                                 const updatedDescription = prompt("Enter updated description:", item.description);
-                                if (updatedName && updatedDescription) {
-                                    updateSpecificTodoItem(item.id, updatedName, updatedDescription);
+                                if (updatedName && updatedBirth && updatedDescription) {
+                                    updateSpecificTodoItem(item.id, updatedName, updatedBirth, updatedDescription);
                                 }
                             }}>Update</Button>
                             <Divider/>
