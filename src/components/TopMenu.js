@@ -48,9 +48,7 @@ function TopMenu() {
                     <Link to={'/Checkout'}>
                         <Button
                             color='yellow'
-                            icon='cart'
-                            label={cart.items.length}
-                            labelPosition='right'
+                            icon='user md'
                             style={cartStyle}
                         />
                     </Link>

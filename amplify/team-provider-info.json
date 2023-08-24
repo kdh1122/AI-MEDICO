@@ -15,11 +15,20 @@
       "auth": {
         "amplifydh8300bcaa8300bcaa": {}
       },
-      "api": {
-        "amplifydh": {}
-      },
       "predictions": {
         "transcription1cb1cf16": {}
+      },
+      "function": {
+        "amplifydh1dbbb2ce": {
+          "deploymentBucketName": "amplify-amplifydh-dev-13844-deployment",
+          "s3Key": "amplify-builds/amplifydh1dbbb2ce-37445056394c2b4a5670-build.zip"
+        }
+      },
+      "storage": {
+        "dynamo9a9db6ca": {}
+      },
+      "api": {
+        "amplifydh": {}
       }
     }
   }

@@ -12,11 +12,11 @@ function CheckoutBanner(props) {
             <Grid.Row>
                 <Grid.Column width={2}>
                     <Link to='/'>
-                        <Image src='/images/store-logo-2.png' style={logoStyle} />
+                        <Image src='/images/삼삼오오.gif' style={logoStyle} />
                     </Link>
                 </Grid.Column>
                 <Grid.Column width={12} verticalAlign='middle' textAlign='center' style={headerStyle}>
-                    <Header as='h1' textAlign='center'>Patient Info. </Header>
+                    <Header as='h1' textAlign='center' style={{ color: 'white' }}>Patient Info. </Header>
                 </Grid.Column>
             </Grid.Row>
         </Grid>
@@ -26,7 +26,8 @@ function CheckoutBanner(props) {
 export default CheckoutBanner
 
 const topBanner = {
-    background: 'url(/images/header-bkg.png)',
+    background: '#000',
+    //background: 'url(/images/header-bkg.png)',
     borderColor: '#DDD',
     borderStyle: 'solid',
     borderWidth: '0 0 1px 0',
@@ -36,11 +37,15 @@ const topBanner = {
 const logoStyle = {
     marginRight: '1.5em', 
     marginLeft: '4em', 
-    marginTop: '5px'
+    marginTop: '5px',
+    marginBottom: '5px',
+    maxWidth: '50%', // 이미지의 최대 너비
+    maxHeight: '50%'
 }
 
 const headerStyle = {
-    marginTop: '5px'
+    marginBottom: '30px',
+    color: 'white',
 }
 
 const QuantityText = styled.a`

@@ -12,7 +12,16 @@
       ],
       "output": {
         "authConfig": {
-          "additionalAuthenticationProviders": [],
+          "additionalAuthenticationProviders": [
+            {
+              "apiKeyConfig": {
+                "apiKeyExpirationDate": "2023-08-31T04:27:03.767Z",
+                "apiKeyExpirationDays": 7,
+                "description": ""
+              },
+              "authenticationType": "API_KEY"
+            }
+          ],
           "defaultAuthentication": {
             "authenticationType": "AMAZON_COGNITO_USER_POOLS",
             "userPoolConfig": {
@@ -55,11 +64,43 @@
       "service": "Cognito"
     }
   },
+  "function": {
+    "amplifydh1dbbb2ce": {
+      "build": true,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_amplifydh1dbbb2ce_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "amplifydh1dbbb2ce"
+        }
+      ]
+    },
+    "AMPLIFY_function_amplifydh1dbbb2ce_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "amplifydh1dbbb2ce"
+        }
+      ]
+    }
+  },
   "predictions": {
     "transcription1cb1cf16": {
       "convertType": "transcription",
       "providerPlugin": "awscloudformation",
       "service": "Transcribe"
+    }
+  },
+  "storage": {
+    "dynamo9a9db6ca": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
     }
   }
 }

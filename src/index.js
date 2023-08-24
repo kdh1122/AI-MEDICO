@@ -14,7 +14,8 @@ import Product from './pages/Product'
 import Checkout from './pages/Checkout'
 import PlacedOrder from './pages/PlacedOrder'
 import Transcribe from './pages/Transcribe'
-import Reko from './pages/Reko'
+import Polly from './pages/Polly'
+import Summary from './pages/Summary'
 
 import awsconfig from './aws-exports'
 Amplify.configure(awsconfig)
@@ -28,7 +29,8 @@ const routing = (
                 <Route path="/checkout" component={Checkout} />
                 <Route path="/ordercomplete" component={PlacedOrder}/>
                 <Route path="/transcribe" component={Transcribe} />
-                <Route path="/reko" component={Reko} />
+                <Route path="/polly" component={Polly} />
+                <Route path="/summary" component={Summary} />
                 <Route component={App} />
             </Switch>
         </Router>

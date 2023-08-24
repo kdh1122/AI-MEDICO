@@ -1,0 +1,126 @@
+.polly-container {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    padding: 20px;
+    width: 100vw;
+    min-height: 100vh;
+    margin: 0 auto;
+    border-radius: 12px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #555;
+}
+
+.chat-box {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column; /* Change to column layout (top to bottom) */
+    position: relative; /* For the divider line */
+}
+
+.timeline-divider {
+    position: absolute;
+    width: 2px;
+    height: 100%;
+    background-color: #ccc;
+    left: 50%; /* Position it at the center */
+    transform: translateX(-50%); /* Center it precisely */
+    z-index: -1; /* Place it behind the messages */
+}
+
+.chat-message {
+    margin: 15px;
+    padding: 15px;
+    border-radius: 12px;
+    position: relative;
+    max-width: 80%; /* Limit the width for better readability */
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.chat-message.user {
+    background-color: #e0e0e0;
+    align-self: flex-start; /* Move user messages to the left */
+}
+
+.chat-message.assistant {
+    background-color: #fff;
+    align-self: flex-end; /* Move assistant messages to the right */
+    border: 1px solid #e0e0e0;
+}
+
+.chat-message.user:before, .chat-message.assistant:before {
+    content: '';
+    width: 14px;
+    height: 14px;
+    background-color: inherit;
+    position: absolute;
+    border-radius: 50%;
+}
+
+.chat-message.user:before {
+    left: -7px;
+    top: 18px;
+}
+
+.chat-message.assistant:before {
+    right: -7px;
+    top: 18px;
+}
+
+.input-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    bottom: 20px; /* Adjust the value to control the vertical position */
+    left: 0;
+    right: 0;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-top: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0px -4px 20px rgba(0, 0, 0, 0.1);
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    margin-right: 15px;
+    font-size: 16px;
+}
+
+button {
+    padding: 15px 25px;
+    border: none;
+    border-radius: 12px;
+    background-color: #007BFF;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+button.start-voice {
+    background-color: #28a745;
+}
+
+button.stop-voice {
+    background-color: #dc3545;
+}
+
+button:focus {
+    outline: none;
+}

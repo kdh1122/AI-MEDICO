@@ -1,0 +1,10 @@
+{
+  "resourceName": "dynamo9a9db6ca",
+  "tableName": "dynamo9a9db6ca",
+  "partitionKey": {
+    "fieldName": "email",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}

@@ -2,9 +2,39 @@
 # all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
 input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
 
-type Todo @model @auth(rules: [{ allow: owner }]) {
+type Blog @model @auth(rules: [{ allow: owner }]) {
   id: ID!
+  email: String!
   name: String!
-  description: String
-  birth: String
+  birth: String!
+  phone: String!
+  scripts: [Script] @hasMany
+  diagnoses: [Diagnosis] @hasMany
+}
+
+type Script @model
+  @auth(
+    rules: [
+      { allow: owner, ownerField: "id", operations: [create, read, update, delete] }
+      { allow: public, operations: [read] }
+    ]
+  ) {
+  id: ID!
+  email: String!
+  blog: Blog @belongsTo(fields: ["id"])
+  script: String!
+}
+
+
+type Diagnosis @model
+  @auth(
+    rules: [
+      { allow: owner, ownerField: "id", operations: [create, read, update, delete] }
+      { allow: public, operations: [read] }
+    ]
+  ) {
+  id: ID!
+  email: String!
+  blog: Blog @belongsTo(fields: ["id"])
+  translation: String!
 }
